@@ -1,0 +1,296 @@
+@font-face {
+    font-family: myFirstFont;
+    src: url('./assets/LovedbytheKing-Regular.ttf');
+}
+
+:root {
+    --top-button-y: 500px;
+    --left-button-x: 880px;
+}
+
+.main {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+}
+
+.vertical-center {
+    margin: 0;
+    /*position: absolute;*/
+    -ms-transform: translate(50%, 50%);
+    transform: translate(5%, 10%) scale(0.5, 0.5);
+}
+
+.box {
+    position:absolute;
+    top:0px;
+    right:0px;
+    bottom:0px;
+    left:0px;
+}
+
+.description-text-food {
+    position: absolute;
+    width: 519px;
+    height: 90px;
+    left: 701px;
+    top: 449px;
+
+    font-family: 'Hind Vadodara';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 30px;
+    text-align: center;
+
+    color: #757575;
+}
+
+.description-text-toy {
+    position: absolute;
+    width: 519px;
+    height: 90px;
+    left: 701px;
+    top: 449px;
+
+    font-family: 'Hind Vadodara';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 30px;
+    text-align: center;
+
+    color: #757575;
+}
+
+.description-text-shelter {
+    position: absolute;
+    width: 519px;
+    height: 120px;
+    left: 701px;
+    top: 435px;
+
+    font-family: 'Hind Vadodara';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 30px;
+    text-align: center;
+
+    color: #757575;
+}
+
+.big-rectangle {
+    position: absolute;
+    width: 763px;
+    height: 659px;
+    left: 579px;
+    top: 340px;
+
+    background: rgba(255, 255, 255, 0.7);
+    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 50px;
+}
+
+.logo-bottom {
+    position: absolute;
+    width: 269px;
+    height: 99px;
+    left: 112px;
+    top: 855px;
+
+    background: url('./assets/icons/logo.png');
+}
+
+.text-rectangle {
+    position: absolute;
+    width: 572px;
+    height: 221px;
+    left: 674px;
+    top: 384px;
+
+    background: rgba(255, 255, 255, 0.7);
+    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 38px;
+}
+
+.instruction-rectangle {
+    position: absolute;
+    width: 363px;
+    height: 187px;
+    left: 779px;
+    top: 771px;
+
+    background: rgba(255, 255, 255, 0.7);
+    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 38px;
+}
+
+.button-rectangle-1 {
+    position: absolute;
+    width: 99px;
+    height: 99px;
+    left: 653px;
+    top: 639px;
+    
+    background: rgba(255, 255, 255, 0.7);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 26px;
+}
+
+.button-rectangle-2 {
+    position: absolute;
+    width: 99px;
+    height: 99px;
+    left: 782px;
+    top: 639px;
+    
+    background: rgba(255, 255, 255, 0.7);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 26px;
+}
+
+.button-rectangle-3 {
+    position: absolute;
+    width: 99px;
+    height: 99px;
+    left: 911px;
+    top: 639px;
+
+    background: rgba(255, 255, 255, 0.7);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 26px;
+}
+
+.button-rectangle-4 {
+    position: absolute;
+    width: 99px;
+    height: 99px;
+    left: 1040px;
+    top: 639px;
+
+    background: rgba(255, 255, 255, 0.7);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 26px;
+}
+
+.button-rectangle-5 {
+    position: absolute;
+    width: 99px;
+    height: 99px;
+    left: 1169px;
+    top: 639px;
+
+    background: rgba(255, 255, 255, 0.7);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 26px;
+}
+
+.main-text {
+    position: absolute;
+    width: 473px;
+    height: 251px;
+    left: 724px;
+    top: 64px;
+    
+    font-family: myFirstFont;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 170px;
+    line-height: 293px;
+    text-align: center;
+    
+    color: #000000;
+}
+
+.back-button {
+    background: url('./assets/icons/back.png');
+
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    position: absolute;
+    width: 52px;
+    height: 60px;
+    left: 677px;
+    top: 658px;
+}
+
+.restart-button {
+    background: url('./assets/icons/restart.png');
+
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    position: absolute;
+    width: 63px;
+    height: 73px;
+    left: 800px;
+    top: 652px;
+
+}
+
+.save-button {
+    background: url('./assets/icons/save.png');
+
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    position: absolute;
+    width: 96px;
+    height: 59px;
+    left: 913px;
+    top: 659px;
+}
+
+.record-button {
+    background: url('./assets/icons/play.png');
+
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    position: absolute;
+    width: 50px;
+    height: 53px;
+    left: 1070px;
+    top: 665px;
+}
+
+.stop-button {
+    background: url('.assets/icons/stop.png');
+
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    position: absolute;
+    width: 50px;
+    height: 53px;
+    left: 1070px;
+    top: 665px;
+}
+
+.front-button {
+    background: url('./assets/icons/front.png');
+
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    position: absolute;
+    width: 52px;
+    height: 60px;
+    left: 1193px;
+    top: 658px;
+
+}
+
+.banner-rectangle {
+    position: absolute;
+    width: 763px;
+    height: 211px;
+    left: 579px;
+    top: 84px;
+
+    background: rgba(255, 255, 255, 0.7);
+    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 50px;
+}
