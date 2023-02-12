@@ -38,7 +38,8 @@ class PanelControl {
     audioCollection = {
         "food": null,
         "toy": null,
-        "shelter": null
+        "shelter": null,
+        "voicemail": null
     }
 
     constructor(panels, rec) {
@@ -51,7 +52,6 @@ class PanelControl {
     }
 
     zIndexAtTop() {
-        console.log(this.panelStack[0]);
         this.panels.filter( elem => elem.htmlID == this.panelStack[0] )
                     .forEach(elem => {console.log(elem); elem.setZIndex(5); elem.applyCSS();});
         this.panels.filter( elem => elem.htmlID != this.panelStack[0] )
@@ -97,6 +97,7 @@ class PanelControl {
     startRecording = () => {
         if (this.panelStack[0] != 'toy' &&
             this.panelStack[0] != 'food' &&
+            this.panelStack[0] != 'voicemail' &&
             this.panelStack[0] != 'shelter' ){
                 return;
         }
@@ -107,7 +108,8 @@ class PanelControl {
     stopRecording = () => {
         if (this.panelStack[0] != 'toy' &&
             this.panelStack[0] != 'food' &&
-            this.panelStack[0] != 'shelter' ){
+            this.panelStack[0] != 'voicemail' &&
+            this.panelStack[0] != 'shelter'  ){
                 return;
         }
         this.recordTimeElapsed = Math.round(Math.abs(this.recordStartDate.getTime() - new Date().getTime()) / 1000);
@@ -126,11 +128,13 @@ class PanelControl {
 panelFood = new Panel(0, 'food', {'background-image': 'url(./assets/background.jpg)'});
 panelToy = new Panel(0, 'toy', {'background-image': 'url(./assets/background.jpg)'});
 panelShelter = new Panel(0, 'shelter', {'background-image': 'url(./assets/background.jpg)'});
+panelVoicemail = new Panel(0, 'voicemail', {'background-image': 'url(./assets/background.jpg)'});
 panelMain = new Panel(1, 'main', {'background-image': 'url(./assets/background.jpg)'});
+panelIntro = new Panel(1, 'intro', {'background-image': 'url(./assets/background.jpg)'});
 
 rec = new AudioRecorder();
 
-panelsControl = new PanelControl([panelFood, panelShelter, panelToy, panelMain], rec);
+panelsControl = new PanelControl([panelFood, panelShelter, panelToy, panelMain, panelVoicemail, panelIntro], rec);
 
 document.addEventListener('keydown', async (event) => {
     switch (event.key) {
@@ -143,8 +147,14 @@ document.addEventListener('keydown', async (event) => {
     case "e":
         panelsControl.addStack('shelter');
         break;
+    case "a":
+        panelsControl.addStack('voicemail');
+        break;
     case "r":
         panelsControl.addStack('main');
+        break;
+    case "s":
+        panelsControl.addStack('intro');
         break;
     case "ArrowLeft":
         panelsControl.popStack();

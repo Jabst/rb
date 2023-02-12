@@ -63,6 +63,76 @@
     color: #757575;
 }
 
+.important-text {
+    position: absolute;
+    width: 656px;
+    height: 129px;
+    left: 632px;
+    top: 272px;
+
+    font-family: myFirstFont;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 75px;
+    line-height: 129px;
+
+    color: #757575;
+}
+
+.intro-rectangle {
+    position: absolute;
+    width: 629px;
+    height: 517px;
+    left: 632px;
+    top: 397px;
+
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 38px;
+}
+
+.intro-text {
+    position: absolute;
+    width: 563px;
+    height: 480px;
+    left: 665px;
+    top: 415px;
+    
+    font-family: 'Hind Vadodara';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 30px;
+    
+    color: #757575;
+}
+
+.logo-centered {
+    position: absolute;
+    width: 323px;
+    height: 119px;
+    left: 799px;
+    top: 126px;
+
+    background: url("./assets/icons/logo.png");
+}
+
+.description-text-voicemail {
+    position: absolute;
+    width: 519px;
+    height: 90px;
+    left: 701px;
+    top: 449px;
+
+    font-family: 'Hind Vadodara';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 30px;
+    text-align: center;
+
+    color: #757575;
+}
+
 .description-text-shelter {
     position: absolute;
     width: 519px;
