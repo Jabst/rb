@@ -107,13 +107,16 @@
 }
 
 .logo-centered {
+    background: url("./assets/icons/logo.png");
+    
     position: absolute;
     width: 323px;
     height: 119px;
     left: 799px;
     top: 126px;
 
-    background: url("./assets/icons/logo.png");
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
 .description-text-voicemail {
@@ -163,13 +166,16 @@
 }
 
 .logo-bottom {
+    background: url('./assets/icons/logo.png');
+    
     position: absolute;
     width: 269px;
     height: 99px;
     left: 112px;
     top: 855px;
 
-    background: url('./assets/icons/logo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
 .text-rectangle {

@@ -2,8 +2,29 @@
      5 -> top
      0 -> bottom
 */
+
+fadeInCard = (id) => {
+    anime({
+        targets: `#${id}`,
+        duration: 2000,
+        opacity: '1.0',
+        easing: 'cubicBezier(0.775, 1.320, 0.980, 0.825)'
+    })  
+}
+
+fadeOutCard = (id) => {
+    anime({
+        targets: `#${id}`,
+        duration: 2000,
+        opacity: '0.0',
+        easing: 'cubicBezier(0.775, 1.320, 0.980, 0.825)'
+    })  
+}
+
+
 class Panel {
     zIndex = 0
+    translate;
     htmlID;
 
     cssProperties;
@@ -15,6 +36,10 @@ class Panel {
 
     setZIndex = (zIndex) => {
         this.zIndex = zIndex;
+    }
+
+    setTranslate = (translate) => {
+        this.translate = translate;
     }
 
     applyCSS = () => {
@@ -45,17 +70,27 @@ class PanelControl {
     constructor(panels, rec) {
         this.panels = panels;
         
-        this.panelStack = ['main'];
+        this.panelStack = [];
 
         this.rec = rec;
         this.isRecording = false;
+
+        this.positionPanels();
+    }
+
+    positionPanels = () => {
+        this.panels.forEach( elem => {
+            elem.setTranslate('-1920px');
+            elem.applyCSS();
+        })
     }
 
     zIndexAtTop() {
+        console.log("CALLED")
         this.panels.filter( elem => elem.htmlID == this.panelStack[0] )
-                    .forEach(elem => {console.log(elem); elem.setZIndex(5); elem.applyCSS();});
+                    .forEach(elem => {fadeInCard(elem.htmlID);});
         this.panels.filter( elem => elem.htmlID != this.panelStack[0] )
-                    .forEach(elem => {console.log(elem); elem.setZIndex(0); elem.applyCSS();});
+                    .forEach(elem => {fadeOutCard(elem.htmlID);});
     }
 
     addStack = (htmlID) => {
@@ -66,6 +101,10 @@ class PanelControl {
 
         console.log(this.panelStack);
         this.redraw();
+    }
+
+    topStack = () => {
+        return this.panelStack[0];
     }
 
     popStack = () => {
@@ -125,18 +164,54 @@ class PanelControl {
     }
 }
 
-panelFood = new Panel(0, 'food', {'background-image': 'url(./assets/background.jpg)'});
-panelToy = new Panel(0, 'toy', {'background-image': 'url(./assets/background.jpg)'});
-panelShelter = new Panel(0, 'shelter', {'background-image': 'url(./assets/background.jpg)'});
-panelVoicemail = new Panel(0, 'voicemail', {'background-image': 'url(./assets/background.jpg)'});
+panelFood = new Panel(0, 'food', {'background-image': 'url(./assets/background.jpg)',
+                                    'opacity': '0.0'});
+panelToy = new Panel(0, 'toy', {'background-image': 'url(./assets/background.jpg)',
+                                'opacity': '0.0'});
+panelShelter = new Panel(0, 'shelter', {'background-image': 'url(./assets/background.jpg)',
+                                        'opacity': '0.0'});
+panelVoicemail = new Panel(0, 'voicemail', {'background-image': 'url(./assets/background.jpg)',
+                                        'opacity': '0.0'});
 panelMain = new Panel(1, 'main', {'background-image': 'url(./assets/background.jpg)'});
-panelIntro = new Panel(1, 'intro', {'background-image': 'url(./assets/background.jpg)'});
+panelIntro = new Panel(1, 'intro', {'background-image': 'url(./assets/background.jpg)',
+                                    'opacity': '0.0'});
 
 rec = new AudioRecorder();
 
 panelsControl = new PanelControl([panelFood, panelShelter, panelToy, panelMain, panelVoicemail, panelIntro], rec);
 
+cycle = ["main", "intro", "food", "toy", "shelter", "voicemail"];
+
+const getNextPanel = (currentPanel) => {
+    if (currentPanel == "voicemail") {
+        return "";
+    }
+
+    for (let i = 0; i < cycle.length; i++) {
+        if (cycle[i] == currentPanel) {
+            return cycle[i+1];
+        }
+    }
+
+    return "voicemail";
+}
+
+const getPreviousPanel = (currentPanel) => {
+    if (currentPanel == "intro") {
+        return "";
+    }
+
+    for (let i = 0; i < cycle.length; i++) {
+        if (cycle[i] == currentPanel) {
+            return cycle[i-1];
+        }
+    }
+
+    return "intro";
+}
+
 document.addEventListener('keydown', async (event) => {
+    let nextPanel = "";
     switch (event.key) {
     case "q":
         panelsControl.addStack('food');
@@ -157,7 +232,16 @@ document.addEventListener('keydown', async (event) => {
         panelsControl.addStack('intro');
         break;
     case "ArrowLeft":
-        panelsControl.popStack();
+        nextPanel = getPreviousPanel(panelsControl.topStack());
+        if (nextPanel != "") {
+            panelsControl.addStack(nextPanel)
+        }
+        break;
+    case "ArrowRight":
+        nextPanel = getNextPanel(panelsControl.topStack());
+        if (nextPanel != "") {
+            panelsControl.addStack(nextPanel)
+        }
         break;
     case " ":
         if (!panelsControl.getIsRecording()) {
@@ -169,3 +253,21 @@ document.addEventListener('keydown', async (event) => {
     }
   console.log("key ", event.key, " code ", event.code, " event " , event)
 })
+
+panelsControl.addStack('main');
+
+anime({
+    targets: '#main',
+    opacity: '0.0',
+    duration: 4000,
+    easing: 'cubicBezier(0.775, 1.320, 0.980, 0.825)'
+})
+
+anime({
+    targets: '#intro',
+    opacity: '1.0',
+    duration: 4000,
+    easing: 'cubicBezier(0.775, 1.320, 0.980, 0.825)',
+    delay: 4000
+})
+
