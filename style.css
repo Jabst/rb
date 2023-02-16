@@ -3,6 +3,11 @@
     src: url('./assets/LovedbytheKing-Regular.ttf');
 }
 
+@font-face {
+    font-family: normalText;
+    src: url('./assets/HindVadodara-Regular.ttf');
+}
+
 :root {
     --top-button-y: 500px;
     --left-button-x: 880px;
@@ -36,7 +41,7 @@
     left: 701px;
     top: 449px;
 
-    font-family: 'Hind Vadodara';
+    font-family: normalText;
     font-style: normal;
     font-weight: 400;
     font-size: 20px;
@@ -53,7 +58,7 @@
     left: 701px;
     top: 449px;
 
-    font-family: 'Hind Vadodara';
+    font-family: normalText;
     font-style: normal;
     font-weight: 400;
     font-size: 20px;
@@ -90,6 +95,24 @@
     border-radius: 38px;
 }
 
+.disclaimer-area {
+    position: absolute;
+    width: 319px;
+    height: 147px;
+    left: 1489px;
+    top: 811px;
+
+    font-family: normalText;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 30px;
+
+    color: #757575;
+
+}
+
+
 .intro-text {
     position: absolute;
     width: 563px;
@@ -97,7 +120,7 @@
     left: 665px;
     top: 415px;
     
-    font-family: 'Hind Vadodara';
+    font-family: normalText;
     font-style: normal;
     font-weight: 400;
     font-size: 20px;
@@ -126,7 +149,7 @@
     left: 701px;
     top: 449px;
 
-    font-family: 'Hind Vadodara';
+    font-family: normalText;
     font-style: normal;
     font-weight: 400;
     font-size: 20px;
@@ -143,7 +166,7 @@
     left: 701px;
     top: 435px;
 
-    font-family: 'Hind Vadodara';
+    font-family: normalText;
     font-style: normal;
     font-weight: 400;
     font-size: 20px;
@@ -178,6 +201,21 @@
     background-repeat: no-repeat;
 }
 
+.cloud {
+    background: url("./assets/icons/nuvem.png");
+
+    position: absolute;
+    width: 218px;
+    height: 137.35px;
+    left: 1600px;
+    top: 876.7px;
+
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    cursor: pointer;
+}
+
 .text-rectangle {
     position: absolute;
     width: 572px;
@@ -202,6 +240,22 @@
     border-radius: 38px;
 }
 
+.instruction-text {
+    position: absolute;
+    width: 295px;
+    height: 90px;
+    left: 826px;
+    top: 827px;
+
+    font-family: normalText;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 30px;
+
+    color: #757575;
+}
+
 .button-rectangle-1 {
     position: absolute;
     width: 99px;
@@ -212,6 +266,8 @@
     background: rgba(255, 255, 255, 0.7);
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 26px;
+
+    cursor: pointer;
 }
 
 .button-rectangle-2 {
@@ -224,6 +280,8 @@
     background: rgba(255, 255, 255, 0.7);
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 26px;
+
+    cursor: pointer;
 }
 
 .button-rectangle-3 {
@@ -236,6 +294,8 @@
     background: rgba(255, 255, 255, 0.7);
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 26px;
+
+    cursor: pointer;
 }
 
 .button-rectangle-4 {
@@ -248,6 +308,8 @@
     background: rgba(255, 255, 255, 0.7);
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 26px;
+
+    cursor: pointer;
 }
 
 .button-rectangle-5 {
@@ -260,6 +322,8 @@
     background: rgba(255, 255, 255, 0.7);
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 26px;
+
+    cursor: pointer;
 }
 
 .main-text {
@@ -290,6 +354,8 @@
     height: 60px;
     left: 677px;
     top: 658px;
+
+    cursor: pointer;
 }
 
 .restart-button {
@@ -304,6 +370,7 @@
     left: 800px;
     top: 652px;
 
+    cursor: pointer;
 }
 
 .save-button {
@@ -317,6 +384,8 @@
     height: 59px;
     left: 913px;
     top: 659px;
+
+    cursor: pointer;
 }
 
 .record-button {
@@ -330,10 +399,12 @@
     height: 53px;
     left: 1070px;
     top: 665px;
+
+    cursor: pointer;
 }
 
 .stop-button {
-    background: url('.assets/icons/stop.png');
+    background: url('./assets/icons/stop.png');
 
     background-size: contain;
     background-repeat: no-repeat;
@@ -343,6 +414,8 @@
     height: 53px;
     left: 1070px;
     top: 665px;
+
+    cursor: pointer;
 }
 
 .front-button {
@@ -357,6 +430,7 @@
     left: 1193px;
     top: 658px;
 
+    cursor: pointer;
 }
 
 .banner-rectangle {

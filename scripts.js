@@ -3,10 +3,12 @@
      0 -> bottom
 */
 
+let deactiveInput = true;
+
 fadeInCard = (id) => {
     anime({
         targets: `#${id}`,
-        duration: 2000,
+        duration: 300,
         opacity: '1.0',
         easing: 'cubicBezier(0.775, 1.320, 0.980, 0.825)'
     })  
@@ -15,7 +17,7 @@ fadeInCard = (id) => {
 fadeOutCard = (id) => {
     anime({
         targets: `#${id}`,
-        duration: 2000,
+        duration: 300,
         opacity: '0.0',
         easing: 'cubicBezier(0.775, 1.320, 0.980, 0.825)'
     })  
@@ -86,11 +88,10 @@ class PanelControl {
     }
 
     zIndexAtTop() {
-        console.log("CALLED")
         this.panels.filter( elem => elem.htmlID == this.panelStack[0] )
-                    .forEach(elem => {fadeInCard(elem.htmlID);});
+                    .forEach(elem => {fadeInCard(elem.htmlID); elem.setZIndex(100); elem.applyCSS()});
         this.panels.filter( elem => elem.htmlID != this.panelStack[0] )
-                    .forEach(elem => {fadeOutCard(elem.htmlID);});
+                    .forEach(elem => {fadeOutCard(elem.htmlID); elem.setZIndex(0); elem.applyCSS()});
     }
 
     addStack = (htmlID) => {
@@ -132,6 +133,12 @@ class PanelControl {
     redraw = () => {
         this.zIndexAtTop();
     }
+
+    restartRecording = () => {
+        this.audioCollection[this.panelStack[0]] = null;
+
+        console.log(this.audioCollection);
+    }
     
     startRecording = () => {
         if (this.panelStack[0] != 'toy' &&
@@ -142,6 +149,11 @@ class PanelControl {
         }
         this.recordStartDate = new Date();
         this.isRecording = !this.isRecording;
+
+        $(".stop-button").show();
+        $(".record-button").hide();
+
+        console.log(this.audioCollection);
     }
 
     stopRecording = () => {
@@ -154,9 +166,12 @@ class PanelControl {
         this.recordTimeElapsed = Math.round(Math.abs(this.recordStartDate.getTime() - new Date().getTime()) / 1000);
         this.audioCollection[this.panelStack[0]] = this.recordTimeElapsed;
 
-        console.log(this.audioCollection);
-
         this.isRecording = !this.isRecording;
+
+        $(".stop-button").hide();
+        $(".record-button").show();
+
+        console.log(this.audioCollection);
     }
 
     getIsRecording = () => {
@@ -211,6 +226,11 @@ const getPreviousPanel = (currentPanel) => {
 }
 
 document.addEventListener('keydown', async (event) => {
+
+    if (deactiveInput) {
+        return;
+    }
+
     let nextPanel = "";
     switch (event.key) {
     case "q":
@@ -231,7 +251,10 @@ document.addEventListener('keydown', async (event) => {
     case "s":
         panelsControl.addStack('intro');
         break;
-    case "ArrowLeft":
+    case "d":
+        panelsControl.restartRecording();
+        break;
+    /*case "ArrowLeft":
         nextPanel = getPreviousPanel(panelsControl.topStack());
         if (nextPanel != "") {
             panelsControl.addStack(nextPanel)
@@ -242,7 +265,7 @@ document.addEventListener('keydown', async (event) => {
         if (nextPanel != "") {
             panelsControl.addStack(nextPanel)
         }
-        break;
+        break;*/
     case " ":
         if (!panelsControl.getIsRecording()) {
             panelsControl.startRecording();
@@ -251,23 +274,113 @@ document.addEventListener('keydown', async (event) => {
         }
         break;
     }
-  console.log("key ", event.key, " code ", event.code, " event " , event)
 })
 
 panelsControl.addStack('main');
+panelsControl.addStack('intro');
 
 anime({
     targets: '#main',
     opacity: '0.0',
-    duration: 4000,
+    duration: 1000,
     easing: 'cubicBezier(0.775, 1.320, 0.980, 0.825)'
 })
 
 anime({
     targets: '#intro',
     opacity: '1.0',
-    duration: 4000,
+    duration: 1000,
     easing: 'cubicBezier(0.775, 1.320, 0.980, 0.825)',
-    delay: 4000
-})
+    delay: 1000
+}).finished.then(function() {
+    deactiveInput = false;
+});
 
+$(".stop-button").hide();
+
+
+$(".stop-button").on('click', () => {
+    if (!panelsControl.getIsRecording()) {
+        panelsControl.startRecording();
+    } else {
+        panelsControl.stopRecording();
+    }
+});
+
+$(".button-rectangle-1").on('click', () => {
+    console.log("back");
+    nextPanel = getPreviousPanel(panelsControl.topStack());
+    console.log(nextPanel);
+    if (nextPanel != "") {
+        panelsControl.addStack(nextPanel)
+    }
+});
+
+$(".button-rectangle-2").on('click', () => {
+    panelsControl.restartRecording();
+});
+
+$(".button-rectangle-3").on('click', () => {
+});
+
+$(".button-rectangle-4").on('click', () => {
+    if (!panelsControl.getIsRecording()) {
+        panelsControl.startRecording();
+    } else {
+        panelsControl.stopRecording();
+    }
+});
+$(".button-rectangle-5").on('click', () => {
+    console.log("front");
+    nextPanel = getNextPanel(panelsControl.topStack());
+
+    console.log(nextPanel);
+    if (nextPanel != "") {
+        panelsControl.addStack(nextPanel)
+    }
+});
+
+// :)
+$(".back-button").on('click', () => {
+    console.log("back");
+    nextPanel = getPreviousPanel(panelsControl.topStack());
+    console.log(nextPanel);
+    if (nextPanel != "") {
+        panelsControl.addStack(nextPanel)
+    }
+});
+
+$(".restart-button").on('click', () => {
+    panelsControl.restartRecording();
+});
+
+$(".save-button").on('click', () => {
+});
+
+$(".record-button").on('click', () => {
+    if (!panelsControl.getIsRecording()) {
+        panelsControl.startRecording();
+    } else {
+        panelsControl.stopRecording();
+    }
+});
+$(".front-button").on('click', () => {
+    console.log("front");
+    nextPanel = getNextPanel(panelsControl.topStack());
+
+    console.log(nextPanel);
+    if (nextPanel != "") {
+        panelsControl.addStack(nextPanel)
+    }
+});
+
+let cloudClick = false;
+
+$(".cloud").on('click', () => {
+    /*if (!cloudClick) {
+        
+    }
+    cloudClick = true;*/
+
+    panelsControl.addStack('food');
+});
