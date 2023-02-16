@@ -10,7 +10,7 @@ fadeInCard = (id) => {
         targets: `#${id}`,
         duration: 300,
         opacity: '1.0',
-        easing: 'cubicBezier(0.775, 1.320, 0.980, 0.825)'
+        easing: 'linear'
     })  
 }
 
@@ -19,7 +19,7 @@ fadeOutCard = (id) => {
         targets: `#${id}`,
         duration: 300,
         opacity: '0.0',
-        easing: 'cubicBezier(0.775, 1.320, 0.980, 0.825)'
+        easing: 'linear'
     })  
 }
 
