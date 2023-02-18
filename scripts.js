@@ -8,18 +8,18 @@ let deactiveInput = true;
 fadeInCard = (id) => {
     anime({
         targets: `#${id}`,
-        duration: 300,
+        duration: 500,
         opacity: '1.0',
-        easing: 'linear'
+        easing: 'easeInQuad'
     })  
 }
 
 fadeOutCard = (id) => {
     anime({
         targets: `#${id}`,
-        duration: 300,
+        duration: 500,
         opacity: '0.0',
-        easing: 'linear'
+        easing: 'easeOutQuad'
     })  
 }
 
@@ -156,6 +156,22 @@ class PanelControl {
         console.log(this.audioCollection);
     }
 
+    formatTimeElapsed = (s) => {
+        let minutes = Math.floor(s / 60);
+        let seconds = s % 60;
+
+        if (minutes < 10) {
+            minutes = `0${minutes}`
+        }
+
+        if (seconds < 10) {
+            seconds = `0${seconds}`
+        }
+
+        return `${minutes}:${seconds}`
+
+    }
+
     stopRecording = () => {
         if (this.panelStack[0] != 'toy' &&
             this.panelStack[0] != 'food' &&
@@ -164,7 +180,7 @@ class PanelControl {
                 return;
         }
         this.recordTimeElapsed = Math.round(Math.abs(this.recordStartDate.getTime() - new Date().getTime()) / 1000);
-        this.audioCollection[this.panelStack[0]] = this.recordTimeElapsed;
+        this.audioCollection[this.panelStack[0]] = this.formatTimeElapsed(this.recordTimeElapsed);
 
         this.isRecording = !this.isRecording;
 
