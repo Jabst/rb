@@ -66,7 +66,8 @@ class PanelControl {
         "food": null,
         "toy": null,
         "shelter": null,
-        "voicemail": null
+        "voicemail": null,
+        "name": null
     }
 
     constructor(panels, rec) {
@@ -206,15 +207,29 @@ panelVoicemail = new Panel(0, 'voicemail', {'background-image': 'url(./assets/ba
 panelMain = new Panel(1, 'main', {'background-image': 'url(./assets/background.jpg)'});
 panelIntro = new Panel(1, 'intro', {'background-image': 'url(./assets/background.jpg)',
                                     'opacity': '0.0'});
+panelName = new Panel(0, 'name', {'background-image': 'url(./assets/background.jpg)',
+                                    'opacity': '0.0'});
+panelLoading = new Panel(0, 'loading', {'background-image': 'url(./assets/background.jpg)',
+                                    'opacity': '0.0'});
+panelSent = new Panel(0, 'sent', {'background-image': 'url(./assets/background.jpg)',
+                                    'opacity': '0.0'});
 
 rec = new AudioRecorder();
 
-panelsControl = new PanelControl([panelFood, panelShelter, panelToy, panelMain, panelVoicemail, panelIntro], rec);
+panelsControl = new PanelControl([panelFood,
+    panelShelter,
+    panelToy,
+    panelMain,
+    panelVoicemail,
+    panelIntro,
+    panelName,
+    panelLoading, 
+    panelSent], rec);
 
-cycle = ["main", "intro", "food", "toy", "shelter", "voicemail"];
+cycle = ["main", "intro", "food", "toy", "shelter", "voicemail", "name", "loading", "sent"];
 
 const getNextPanel = (currentPanel) => {
-    if (currentPanel == "voicemail") {
+    if (currentPanel == "sent") {
         return "";
     }
 
@@ -224,7 +239,7 @@ const getNextPanel = (currentPanel) => {
         }
     }
 
-    return "voicemail";
+    return "sent";
 }
 
 const getPreviousPanel = (currentPanel) => {
@@ -249,7 +264,7 @@ document.addEventListener('keydown', async (event) => {
 
     let nextPanel = "";
     switch (event.key) {
-    case "q":
+    /*case "q":
         panelsControl.addStack('food');
         break;
     case "w":
@@ -269,8 +284,8 @@ document.addEventListener('keydown', async (event) => {
         break;
     case "d":
         panelsControl.restartRecording();
-        break;
-    /*case "ArrowLeft":
+        break;*/
+    case "ArrowLeft":
         nextPanel = getPreviousPanel(panelsControl.topStack());
         if (nextPanel != "") {
             panelsControl.addStack(nextPanel)
@@ -281,7 +296,7 @@ document.addEventListener('keydown', async (event) => {
         if (nextPanel != "") {
             panelsControl.addStack(nextPanel)
         }
-        break;*/
+        break;
     case " ":
         if (!panelsControl.getIsRecording()) {
             panelsControl.startRecording();
@@ -324,7 +339,6 @@ $(".stop-button").on('click', () => {
 });
 
 $(".button-rectangle-1").on('click', () => {
-    console.log("back");
     nextPanel = getPreviousPanel(panelsControl.topStack());
     console.log(nextPanel);
     if (nextPanel != "") {
@@ -337,19 +351,17 @@ $(".button-rectangle-2").on('click', () => {
 });
 
 $(".button-rectangle-3").on('click', () => {
-});
-
-$(".button-rectangle-4").on('click', () => {
     if (!panelsControl.getIsRecording()) {
         panelsControl.startRecording();
     } else {
         panelsControl.stopRecording();
     }
 });
-$(".button-rectangle-5").on('click', () => {
+
+$(".button-rectangle-4").on('click', () => {
     console.log("front");
     nextPanel = getNextPanel(panelsControl.topStack());
-
+    
     console.log(nextPanel);
     if (nextPanel != "") {
         panelsControl.addStack(nextPanel)
@@ -369,6 +381,51 @@ $(".back-button").on('click', () => {
 $(".restart-button").on('click', () => {
     panelsControl.restartRecording();
 });
+
+
+$(".button-1-name").on('click', () => {
+    nextPanel = getPreviousPanel(panelsControl.topStack());
+    console.log(nextPanel);
+    if (nextPanel != "") {
+        panelsControl.addStack(nextPanel)
+    }
+});
+
+$(".button-1-name-icon").on('click', () => {
+    nextPanel = getPreviousPanel(panelsControl.topStack());
+    console.log(nextPanel);
+    if (nextPanel != "") {
+        panelsControl.addStack(nextPanel)
+    }
+});
+
+$(".button-2-name").on('click', () => {
+    console.log("TO SEND");
+
+    saveFinal();
+}) 
+
+$(".button-2-name-icon").on('click', () => {
+    saveFinal();
+});
+
+const saveFinal = () => {
+    nextPanel = getNextPanel(panelsControl.topStack());
+
+    console.log(nextPanel);
+    if (nextPanel != "") {
+        panelsControl.addStack(nextPanel)
+    }
+
+    setTimeout( () => {
+        nextPanel = getNextPanel(panelsControl.topStack());
+
+        console.log(nextPanel);
+        if (nextPanel != "") {
+            panelsControl.addStack(nextPanel)
+        }
+    }, 1000);
+}
 
 $(".save-button").on('click', () => {
 });

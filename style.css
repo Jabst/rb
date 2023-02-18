@@ -243,15 +243,16 @@
 .instruction-text {
     position: absolute;
     width: 295px;
-    height: 90px;
-    left: 826px;
-    top: 827px;
+    height: 60px;
+    left: 813px;
+    top: 835px;
 
     font-family: normalText;
     font-style: normal;
     font-weight: 400;
     font-size: 20px;
     line-height: 30px;
+    text-align: center;
 
     color: #757575;
 }
@@ -260,8 +261,8 @@
     position: absolute;
     width: 99px;
     height: 99px;
-    left: 653px;
-    top: 639px;
+    left: 718px;
+    top: 638px;
     
     background: rgba(255, 255, 255, 0.7);
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -274,8 +275,8 @@
     position: absolute;
     width: 99px;
     height: 99px;
-    left: 782px;
-    top: 639px;
+    left: 847px;
+    top: 638px;
     
     background: rgba(255, 255, 255, 0.7);
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -288,8 +289,8 @@
     position: absolute;
     width: 99px;
     height: 99px;
-    left: 911px;
-    top: 639px;
+    left: 976px;
+    top: 638px;
 
     background: rgba(255, 255, 255, 0.7);
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -302,22 +303,8 @@
     position: absolute;
     width: 99px;
     height: 99px;
-    left: 1040px;
-    top: 639px;
-
-    background: rgba(255, 255, 255, 0.7);
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 26px;
-
-    cursor: pointer;
-}
-
-.button-rectangle-5 {
-    position: absolute;
-    width: 99px;
-    height: 99px;
-    left: 1169px;
-    top: 639px;
+    left: 1105px;
+    top: 638px;
 
     background: rgba(255, 255, 255, 0.7);
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -352,8 +339,8 @@
     position: absolute;
     width: 52px;
     height: 60px;
-    left: 677px;
-    top: 658px;
+    left: 742px;
+    top: 657px;
 
     cursor: pointer;
 }
@@ -365,40 +352,25 @@
     background-repeat: no-repeat;
 
     position: absolute;
-    width: 63px;
-    height: 73px;
-    left: 800px;
-    top: 652px;
-
-    cursor: pointer;
-}
-
-.save-button {
-    background: url('./assets/icons/save.png');
-
-    background-size: contain;
-    background-repeat: no-repeat;
-
-    position: absolute;
-    width: 96px;
-    height: 59px;
-    left: 913px;
-    top: 659px;
+    width: 58px;
+    height: 67px;
+    left: 868px;
+    top: 654px;
 
     cursor: pointer;
 }
 
 .record-button {
-    background: url('./assets/icons/play.png');
+    background: url('./assets/icons/record2.png');
 
     background-size: contain;
     background-repeat: no-repeat;
 
     position: absolute;
-    width: 50px;
-    height: 53px;
-    left: 1070px;
-    top: 665px;
+    width: 59px;
+    height: 59px;
+    left: 996px;
+    top: 658px;
 
     cursor: pointer;
 }
@@ -410,10 +382,10 @@
     background-repeat: no-repeat;
 
     position: absolute;
-    width: 50px;
-    height: 53px;
-    left: 1070px;
-    top: 665px;
+    width: 59px;
+    height: 59px;
+    left: 996px;
+    top: 658px;
 
     cursor: pointer;
 }
@@ -427,8 +399,8 @@
     position: absolute;
     width: 52px;
     height: 60px;
-    left: 1193px;
-    top: 658px;
+    left: 1129px;
+    top: 657px;
 
     cursor: pointer;
 }
@@ -443,4 +415,354 @@
     background: rgba(255, 255, 255, 0.7);
     box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 50px;
+}
+
+.instruction-name {
+    position: absolute;
+    width: 295px;
+    height: 30px;
+    left: 813px;
+    top: 918px;
+
+    font-family: normalText;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 30px;
+    /* identical to box height */
+
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    color: #757575;
+}
+
+.center-title-rectangle-name {
+    position: absolute;
+    width: 763px;
+    height: 211px;
+    left: 579px;
+    top: 212px;
+
+    background: rgba(255, 255, 255, 0.7);
+    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 50px;
+}
+
+.center-title-text-name {
+    position: absolute;
+    width: 716px;
+    height: 251px;
+    left: 602px;
+    top: 192px;
+
+    font-family: myFirstFont;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 170px;
+    line-height: 293px;
+    text-align: center;
+
+    color: #000000;
+}
+
+.content-rectangle-name {
+    position: absolute;
+    width: 763px;
+    height: 221px;
+    left: 579px;
+    top: 463px;
+    
+    background: rgba(255, 255, 255, 0.7);
+    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 38px;
+}
+
+.content-text-name {
+    position: absolute;
+    width: 519px;
+    height: 30px;
+    left: 701px;
+    top: 487px;
+    
+    font-family: normalText;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 30px;
+    /* identical to box height */
+    
+    text-align: center;
+    color: #757575;
+}
+
+
+.button-1-name {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    left: 788px;
+    top: 717px;
+    
+    background: rgba(255, 255, 255, 0.7);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 26px;
+}
+
+.button-1-name-icon {
+    background: url('./assets/icons/back.png');
+
+
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    cursor: pointer;
+
+    position: absolute;
+    width: 78.79px;
+    height: 90.91px;
+    left: 824.36px;
+    top: 745.79px;
+
+}
+
+.button-2-name {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    left: 983px;
+    top: 717px;
+
+    background: rgba(255, 255, 255, 0.7);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 26px;
+}
+
+.button-2-name-icon {
+    background: url('./assets/icons/save.png');
+
+
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    cursor: pointer;
+
+    position: absolute;
+    width: 133.33px;
+    height: 81.82px;
+    left: 992.09px;
+    top: 750.33px;
+
+}
+
+.logo-image {
+    background: url('./assets/icons/logo.png');
+
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    position: absolute;
+    width: 402px;
+    height: 151px;
+    left: 759px;
+    top: 85px;
+
+}
+
+.text-loading-image {
+    position: absolute;
+    width: 716px;
+    height: 251px;
+    left: 602px;
+    top: 396px;
+
+    font-family: myFirstFont;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 200px;
+    line-height: 345px;
+    text-align: center;
+
+    color: #FFFFFF;
+}
+
+.text-sent {
+    position: absolute;
+    width: 466px;
+    height: 251px;
+    left: 727px;
+    top: 273px;
+
+    font-family: myFirstFont;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 170px;
+    line-height: 293px;
+    text-align: center;
+
+    z-index: 2;
+
+    color: #D6AC7D;
+
+}
+
+.envelope-sent {
+    background: url('./assets/icons/envelop.png');
+
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    z-index: 1;
+
+    position: absolute;
+    width: 676px;
+    height: 470px;
+    left: 622px;
+    top: 430px;
+
+}
+
+input,
+span,
+label,
+textarea {
+  font-family: myFirstFont;
+  display: block;
+  margin: 10px;
+  padding: 5px;
+  border: none;
+  font-size: 22px;
+}
+
+textarea:focus,
+input:focus {
+  outline: 0;
+}
+/* Question */
+
+input.question {
+  font-size: 48px;
+  font-weight: 300;
+  border-radius: 2px;
+  margin: 0;
+  border: none;
+  width: 80%;
+  background: rgba(0, 0, 0, 0);
+  transition: padding-top 0.2s ease, margin-top 0.2s ease;
+  overflow-x: hidden; /* Hack to make "rows" attribute apply in Firefox. */
+}
+/* Underline and Placeholder */
+
+input.question + label {
+  display: block;
+  position: relative;
+  white-space: nowrap;
+  padding: 0;
+  margin: 0;
+  width: 10%;
+  border-top: 1px solid red;
+  -webkit-transition: width 0.4s ease;
+  transition: width 0.4s ease;
+  height: 0px;
+}
+
+input.question:focus + label,
+textarea.question:focus + label {
+  width: 80%;
+}
+
+input.question:focus,
+input.question:valid {
+  padding-top: 35px;
+}
+
+textarea.question:valid,
+textarea.question:focus {
+  margin-top: 35px;
+}
+
+input.question:focus + label > span,
+input.question:valid + label > span {
+  top: -100px;
+  font-size: 22px;
+  color: #333;
+}
+
+textarea.question:focus + label > span,
+textarea.question:valid + label > span {
+  top: -150px;
+  font-size: 22px;
+  color: #333;
+}
+
+input.question:valid + label,
+textarea.question:valid + label {
+  border-color: green;
+}
+
+input.question:invalid,
+textarea.question:invalid {
+  box-shadow: none;
+}
+
+form {
+    position: absolute;
+    width: 519px;
+    height: 30px;
+    left: 701px;
+    top: 487px;
+
+}
+
+input.question + label > span {
+  font-weight: 300;
+  margin: 0;
+  position: absolute;
+  color: #8F8F8F;
+  font-size: 48px;
+  top: -66px;
+  left: 0px;
+  z-index: -1;
+  -webkit-transition: top 0.2s ease, font-size 0.2s ease, color 0.2s ease;
+  transition: top 0.2s ease, font-size 0.2s ease, color 0.2s ease;
+}
+
+input[type="submit"] {
+  -webkit-transition: opacity 0.2s ease, background 0.2s ease;
+  transition: opacity 0.2s ease, background 0.2s ease;
+  display: block;
+  opacity: 0;
+  margin: 10px 0 0 0;
+  padding: 10px;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  background: #EEE;
+}
+
+input[type="submit"]:active {
+  background: #999;
+}
+
+input.question:valid ~ input[type="submit"], textarea.question:valid ~ input[type="submit"] {
+  -webkit-animation: appear 1s forwards;
+  animation: appear 1s forwards;
+}
+
+input.question:invalid ~ input[type="submit"], textarea.question:invalid ~ input[type="submit"] {
+  display: none;
+}
+
+@-webkit-keyframes appear {
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes appear {
+  100% {
+    opacity: 1;
+  }
 }
