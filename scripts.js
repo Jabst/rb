@@ -8,7 +8,7 @@ let deactiveInput = true;
 fadeInCard = (id) => {
     anime({
         targets: `#${id}`,
-        duration: 500,
+        duration: 1000,
         opacity: '1.0',
         easing: 'easeInQuad'
     })  
@@ -19,7 +19,8 @@ fadeOutCard = (id) => {
         targets: `#${id}`,
         duration: 500,
         opacity: '0.0',
-        easing: 'easeOutQuad'
+        easing: 'linear',
+        delay: 1000,
     })  
 }
 
@@ -70,6 +71,13 @@ class PanelControl {
         "name": null
     }
 
+    times = {
+        "food": null,
+        "toy": null,
+        "shelter": null,
+        "voicemail": null
+    }
+
     constructor(panels, rec) {
         this.panels = panels;
         
@@ -77,15 +85,6 @@ class PanelControl {
 
         this.rec = rec;
         this.isRecording = false;
-
-        this.positionPanels();
-    }
-
-    positionPanels = () => {
-        this.panels.forEach( elem => {
-            elem.setTranslate('-1920px');
-            elem.applyCSS();
-        })
     }
 
     zIndexAtTop() {
@@ -173,6 +172,12 @@ class PanelControl {
 
     }
 
+    sumAllTimes = () => {
+        let total = this.times.food + this.times.shelter + this.times.toy + this.times.voicemail;
+
+        return this.formatTimeElapsed(total);
+    }
+
     stopRecording = () => {
         if (this.panelStack[0] != 'toy' &&
             this.panelStack[0] != 'food' &&
@@ -181,6 +186,8 @@ class PanelControl {
                 return;
         }
         this.recordTimeElapsed = Math.round(Math.abs(this.recordStartDate.getTime() - new Date().getTime()) / 1000);
+
+        this.times[this.panelStack[0]] = this.recordTimeElapsed;
         this.audioCollection[this.panelStack[0]] = this.formatTimeElapsed(this.recordTimeElapsed);
 
         this.isRecording = !this.isRecording;
@@ -193,6 +200,10 @@ class PanelControl {
 
     getIsRecording = () => {
         return this.isRecording;
+    }
+
+    setName = (name) => {
+        this.audioCollection.name = name;
     }
 }
 
@@ -313,7 +324,7 @@ panelsControl.addStack('intro');
 anime({
     targets: '#main',
     opacity: '0.0',
-    duration: 1000,
+    duration: 2000,
     easing: 'cubicBezier(0.775, 1.320, 0.980, 0.825)'
 })
 
@@ -322,7 +333,7 @@ anime({
     opacity: '1.0',
     duration: 1000,
     easing: 'cubicBezier(0.775, 1.320, 0.980, 0.825)',
-    delay: 1000
+    delay: 1500
 }).finished.then(function() {
     deactiveInput = false;
 });
@@ -411,11 +422,20 @@ $(".button-2-name-icon").on('click', () => {
 
 const saveFinal = () => {
     nextPanel = getNextPanel(panelsControl.topStack());
-
-    console.log(nextPanel);
     if (nextPanel != "") {
         panelsControl.addStack(nextPanel)
     }
+
+    console.log(panelsControl);
+
+    postEnvelope({
+        "toy": panelsControl.audioCollection.toy,
+        "food": panelsControl.audioCollection.food,
+        "shelter": panelsControl.audioCollection.shelter,
+        "voicemail": panelsControl.audioCollection.voicemail,
+        "name": panelsControl.audioCollection.name,
+        "total": panelsControl.sumAllTimes(),
+    })
 
     setTimeout( () => {
         nextPanel = getNextPanel(panelsControl.topStack());
@@ -426,6 +446,10 @@ const saveFinal = () => {
         }
     }, 1000);
 }
+
+$("#nme").on('input', () => {
+    panelsControl.setName($("#nme").val());
+});
 
 $(".save-button").on('click', () => {
 });
