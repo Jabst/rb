@@ -3,12 +3,12 @@
      0 -> bottom
 */
 
-let deactiveInput = true;
+let deactiveInput = false;
 
 fadeInCard = (id) => {
     anime({
         targets: `#${id}`,
-        duration: 1000,
+        duration: 250,
         opacity: '1.0',
         easing: 'easeInQuad'
     })  
@@ -17,10 +17,10 @@ fadeInCard = (id) => {
 fadeOutCard = (id) => {
     anime({
         targets: `#${id}`,
-        duration: 500,
+        duration: 175,
         opacity: '0.0',
         easing: 'linear',
-        delay: 1000,
+        delay: 125,
     })  
 }
 
@@ -31,10 +31,9 @@ class Panel {
     htmlID;
 
     cssProperties;
-    constructor(zIndex, htmlID, cssProperties) {
+    constructor(zIndex, htmlID) {
         this.zIndex = zIndex;
         this.htmlID = htmlID;
-        this.cssProperties = cssProperties;
     }
 
     setZIndex = (zIndex) => {
@@ -47,13 +46,8 @@ class Panel {
 
     applyCSS = () => {
         $(`#${this.htmlID}`).css('z-index', this.zIndex);
-
-        for (let [k, v] of Object.entries(this.cssProperties)) {
-            $(`#${this.htmlID}`).css(k, v);
-        }
     }
 }
-
 
 class PanelControl {
     panels;
@@ -63,12 +57,20 @@ class PanelControl {
 
     rec;
 
-    audioCollection = {
-        "food": null,
-        "toy": null,
-        "shelter": null,
+    backgrounds = {
         "voicemail": null,
-        "name": null
+        "sent": null,
+        "loading": null,
+        "shelter": null,
+        "toy": null,
+        "intro": null
+    }
+
+    audioCollection = {
+        "name": null,
+        "where": null,
+        "look": null,
+        "do": null
     }
 
     times = {
@@ -87,9 +89,36 @@ class PanelControl {
         this.isRecording = false;
     }
 
+    initBackgroundAt = (id) => {
+        this.backgrounds[id] = VANTA.CLOUDS({
+            el: `#${id}`,
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            backgroundColor: 0x8c5757,
+            skyColor: 0x5a7091,
+            cloudColor: 0x7a6e7a,
+            cloudShadowColor: 0x696969,
+            sunColor: 0xa0743f,
+            sunGlareColor: 0x7f4533,
+            sunlightColor: 0xffe3c8,
+        })
+    }
+
+    cleanBackgrounds = () => {
+        for (var property in this.backgrounds) {
+            if (this.backgrounds[property] != null) {
+                this.backgrounds[property].destroy();
+            }
+        }
+    }
+
     zIndexAtTop() {
+        this.cleanBackgrounds();
         this.panels.filter( elem => elem.htmlID == this.panelStack[0] )
-                    .forEach(elem => {fadeInCard(elem.htmlID); elem.setZIndex(100); elem.applyCSS()});
+                    .forEach(elem => {fadeInCard(elem.htmlID); elem.setZIndex(100); elem.applyCSS(); this.initBackgroundAt(elem.htmlID)});
         this.panels.filter( elem => elem.htmlID != this.panelStack[0] )
                     .forEach(elem => {fadeOutCard(elem.htmlID); elem.setZIndex(0); elem.applyCSS()});
     }
@@ -134,50 +163,6 @@ class PanelControl {
         this.zIndexAtTop();
     }
 
-    restartRecording = () => {
-        this.audioCollection[this.panelStack[0]] = null;
-
-        console.log(this.audioCollection);
-    }
-    
-    startRecording = () => {
-        if (this.panelStack[0] != 'toy' &&
-            this.panelStack[0] != 'food' &&
-            this.panelStack[0] != 'voicemail' &&
-            this.panelStack[0] != 'shelter' ){
-                return;
-        }
-        this.recordStartDate = new Date();
-        this.isRecording = !this.isRecording;
-
-        $(".stop-button").show();
-        $(".record-button").hide();
-
-        console.log(this.audioCollection);
-    }
-
-    formatTimeElapsed = (s) => {
-        let minutes = Math.floor(s / 60);
-        let seconds = s % 60;
-
-        if (minutes < 10) {
-            minutes = `0${minutes}`
-        }
-
-        if (seconds < 10) {
-            seconds = `0${seconds}`
-        }
-
-        return `${minutes}:${seconds}`
-
-    }
-
-    sumAllTimes = () => {
-        let total = this.times.food + this.times.shelter + this.times.toy + this.times.voicemail;
-
-        return this.formatTimeElapsed(total);
-    }
-
     stopRecording = () => {
         if (this.panelStack[0] != 'toy' &&
             this.panelStack[0] != 'food' &&
@@ -205,39 +190,51 @@ class PanelControl {
     setName = (name) => {
         this.audioCollection.name = name;
     }
+
+    setWhere = (where) => {
+        this.audioCollection.where = where;
+    }
+
+    setLook = (look) => {
+        this.audioCollection.look = look;
+    }
+
+    setDo = (d) => {
+        this.audioCollection.do = d;
+    }
+
+    formatRequestString = () => {
+        return `${this.audioCollection.look} ${this.audioCollection.where} ${this.audioCollection.do}`
+    }
+
+    getPetName = () => {
+        return this.audioCollection.name;
+    }
+
+    resetStack = () => {
+        this.panelStack = [];
+    }
 }
 
-panelFood = new Panel(0, 'food', {'background-image': 'url(./assets/background.jpg)',
-                                    'opacity': '0.0'});
-panelToy = new Panel(0, 'toy', {'background-image': 'url(./assets/background.jpg)',
-                                'opacity': '0.0'});
-panelShelter = new Panel(0, 'shelter', {'background-image': 'url(./assets/background.jpg)',
-                                        'opacity': '0.0'});
-panelVoicemail = new Panel(0, 'voicemail', {'background-image': 'url(./assets/background.jpg)',
-                                        'opacity': '0.0'});
-panelMain = new Panel(1, 'main', {'background-image': 'url(./assets/background.jpg)'});
-panelIntro = new Panel(1, 'intro', {'background-image': 'url(./assets/background.jpg)',
-                                    'opacity': '0.0'});
-panelName = new Panel(0, 'name', {'background-image': 'url(./assets/background.jpg)',
-                                    'opacity': '0.0'});
-panelLoading = new Panel(0, 'loading', {'background-image': 'url(./assets/background.jpg)',
-                                    'opacity': '0.0'});
-panelSent = new Panel(0, 'sent', {'background-image': 'url(./assets/background.jpg)',
-                                    'opacity': '0.0'});
+panelFood = new Panel(0, 'food');
+panelToy = new Panel(0, 'toy');
+panelShelter = new Panel(0, 'shelter');
+panelVoicemail = new Panel(0, 'voicemail');
+panelIntro = new Panel(1, 'intro');
+panelLoading = new Panel(0, 'loading');
+panelSent = new Panel(0, 'sent');
 
 rec = new AudioRecorder();
 
 panelsControl = new PanelControl([panelFood,
     panelShelter,
     panelToy,
-    panelMain,
     panelVoicemail,
     panelIntro,
-    panelName,
     panelLoading, 
     panelSent], rec);
 
-cycle = ["main", "intro", "food", "toy", "shelter", "voicemail", "name", "loading", "sent"];
+cycle = ["intro", "food", "toy", "shelter", "voicemail", "loading", "sent"];
 
 const getNextPanel = (currentPanel) => {
     if (currentPanel == "sent") {
@@ -275,27 +272,6 @@ document.addEventListener('keydown', async (event) => {
 
     let nextPanel = "";
     switch (event.key) {
-    /*case "q":
-        panelsControl.addStack('food');
-        break;
-    case "w":
-        panelsControl.addStack('toy');
-        break;
-    case "e":
-        panelsControl.addStack('shelter');
-        break;
-    case "a":
-        panelsControl.addStack('voicemail');
-        break;
-    case "r":
-        panelsControl.addStack('main');
-        break;
-    case "s":
-        panelsControl.addStack('intro');
-        break;
-    case "d":
-        panelsControl.restartRecording();
-        break;*/
     case "ArrowLeft":
         nextPanel = getPreviousPanel(panelsControl.topStack());
         if (nextPanel != "") {
@@ -308,35 +284,10 @@ document.addEventListener('keydown', async (event) => {
             panelsControl.addStack(nextPanel)
         }
         break;
-    case " ":
-        if (!panelsControl.getIsRecording()) {
-            panelsControl.startRecording();
-        } else {
-            panelsControl.stopRecording();
-        }
-        break;
     }
 })
 
-panelsControl.addStack('main');
 panelsControl.addStack('intro');
-
-anime({
-    targets: '#main',
-    opacity: '0.0',
-    duration: 2000,
-    easing: 'cubicBezier(0.775, 1.320, 0.980, 0.825)'
-})
-
-anime({
-    targets: '#intro',
-    opacity: '1.0',
-    duration: 1000,
-    easing: 'cubicBezier(0.775, 1.320, 0.980, 0.825)',
-    delay: 1500
-}).finished.then(function() {
-    deactiveInput = false;
-});
 
 $(".stop-button").hide();
 
@@ -349,135 +300,130 @@ $(".stop-button").on('click', () => {
     }
 });
 
-$(".button-rectangle-1").on('click', () => {
+$(".backward-button-rectangle").on('click', () => {
     nextPanel = getPreviousPanel(panelsControl.topStack());
-    console.log(nextPanel);
     if (nextPanel != "") {
         panelsControl.addStack(nextPanel)
     }
 });
 
-$(".button-rectangle-2").on('click', () => {
-    panelsControl.restartRecording();
-});
-
-$(".button-rectangle-3").on('click', () => {
-    if (!panelsControl.getIsRecording()) {
-        panelsControl.startRecording();
-    } else {
-        panelsControl.stopRecording();
+$(".backward-button-icon").on('click', () => {
+    nextPanel = getPreviousPanel(panelsControl.topStack());
+    if (nextPanel != "") {
+        panelsControl.addStack(nextPanel)
     }
 });
 
-$(".button-rectangle-4").on('click', () => {
-    console.log("front");
+$(".forward-button-rectangle").on('click', () => {
     nextPanel = getNextPanel(panelsControl.topStack());
     
-    console.log(nextPanel);
     if (nextPanel != "") {
         panelsControl.addStack(nextPanel)
+    }
+});
+
+$(".forward-button-icon").on('click', () => {
+    nextPanel = getNextPanel(panelsControl.topStack());
+    
+    if (nextPanel != "") {
+        panelsControl.addStack(nextPanel);
     }
 });
 
 // :)
 $(".back-button").on('click', () => {
-    console.log("back");
     nextPanel = getPreviousPanel(panelsControl.topStack());
-    console.log(nextPanel);
     if (nextPanel != "") {
         panelsControl.addStack(nextPanel)
     }
 });
-
-$(".restart-button").on('click', () => {
-    panelsControl.restartRecording();
-});
-
-
-$(".button-1-name").on('click', () => {
-    nextPanel = getPreviousPanel(panelsControl.topStack());
-    console.log(nextPanel);
-    if (nextPanel != "") {
-        panelsControl.addStack(nextPanel)
-    }
-});
-
-$(".button-1-name-icon").on('click', () => {
-    nextPanel = getPreviousPanel(panelsControl.topStack());
-    console.log(nextPanel);
-    if (nextPanel != "") {
-        panelsControl.addStack(nextPanel)
-    }
-});
-
-$(".button-2-name").on('click', () => {
-    console.log("TO SEND");
-
-    saveFinal();
-}) 
-
-$(".button-2-name-icon").on('click', () => {
-    saveFinal();
-});
-
-const saveFinal = () => {
-    nextPanel = getNextPanel(panelsControl.topStack());
-    if (nextPanel != "") {
-        panelsControl.addStack(nextPanel)
-    }
-
-    console.log(panelsControl);
-
-    postEnvelope({
-        "toy": panelsControl.audioCollection.toy,
-        "food": panelsControl.audioCollection.food,
-        "shelter": panelsControl.audioCollection.shelter,
-        "voicemail": panelsControl.audioCollection.voicemail,
-        "name": panelsControl.audioCollection.name,
-        "total": panelsControl.sumAllTimes(),
-    })
-
-    setTimeout( () => {
-        nextPanel = getNextPanel(panelsControl.topStack());
-
-        console.log(nextPanel);
-        if (nextPanel != "") {
-            panelsControl.addStack(nextPanel)
-        }
-    }, 1000);
-}
 
 $("#nme").on('input', () => {
     panelsControl.setName($("#nme").val());
 });
 
-$(".save-button").on('click', () => {
+$("#look").on('input', () => {
+    panelsControl.setLook($("#look").val());
 });
 
-$(".record-button").on('click', () => {
-    if (!panelsControl.getIsRecording()) {
-        panelsControl.startRecording();
-    } else {
-        panelsControl.stopRecording();
+$("#do").on('input', () => {
+    panelsControl.setDo($("#do").val());
+});
+
+$("#where").on('input', () => {
+    panelsControl.setWhere($("#where").val());
+});
+
+$(".right-square").on('click', () => {
+    console.log(panelsControl.formatRequestString());
+
+    $(".pet-name-text").html(panelsControl.getPetName());
+
+    requestImage(panelsControl.formatRequestString());
+
+    nextPanel = getNextPanel(panelsControl.topStack());
+    
+    if (nextPanel != "") {
+        panelsControl.addStack(nextPanel);
     }
 });
+
+
+$(".back-icon").on('click', () => {
+    panelsControl.resetStack();
+    panelsControl.addStack('intro');
+});
+
+
+$(".right-icon-f").on('click', () => {
+    console.log(panelsControl.formatRequestString());
+
+    $(".pet-name-text").html(panelsControl.getPetName());
+
+    requestImage(panelsControl.formatRequestString());
+
+    nextPanel = getNextPanel(panelsControl.topStack());
+    
+    if (nextPanel != "") {
+        panelsControl.addStack(nextPanel);
+    }
+});
+
 $(".front-button").on('click', () => {
-    console.log("front");
     nextPanel = getNextPanel(panelsControl.topStack());
 
-    console.log(nextPanel);
     if (nextPanel != "") {
         panelsControl.addStack(nextPanel)
     }
 });
 
-let cloudClick = false;
+const setImageOfPolaroidFrame = (urlString) => {
+    console.log(urlString);
 
-$(".cloud").on('click', () => {
-    /*if (!cloudClick) {
-        
+    nextPanel = getNextPanel(panelsControl.topStack());
+    
+    if (nextPanel != "") {
+        panelsControl.addStack(nextPanel);
     }
-    cloudClick = true;*/
 
-    panelsControl.addStack('food');
+    $('.image-placement').css('background-size', 'contain');
+    $('.image-placement').css('background-image', `url(${urlString})`);
+}
+
+$(document).keypress(
+    function(event){
+        if (event.which == '13') {
+        event.preventDefault();
+        }
+    }
+);
+
+$(".left-square").on('click', () => {
+    panelsControl.resetStack();
+    panelsControl.addStack('intro');
+});
+
+$(".left-icon-f").on('click', () => {
+    panelsControl.resetStack();
+    panelsControl.addStack('intro');
 });
