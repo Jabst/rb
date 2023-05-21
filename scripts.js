@@ -10,8 +10,11 @@ fadeInCard = (id) => {
         targets: `#${id}`,
         duration: 250,
         opacity: '1.0',
-        easing: 'easeInQuad'
-    })  
+        easing: 'easeInQuad',
+        begin: function(anim) {
+            //  deactiveInput = true;
+        },
+    });
 }
 
 fadeOutCard = (id) => {
@@ -21,7 +24,10 @@ fadeOutCard = (id) => {
         opacity: '0.0',
         easing: 'linear',
         delay: 125,
-    })  
+        complete: function(anim) {
+            deactivateInput = false;
+        }
+    });
 }
 
 
@@ -98,13 +104,17 @@ class PanelControl {
             minHeight: 200.00,
             minWidth: 200.00,
             backgroundColor: 0x8c5757,
-            skyColor: 0x5a7091,
-            cloudColor: 0x7a6e7a,
-            cloudShadowColor: 0x696969,
-            sunColor: 0xa0743f,
-            sunGlareColor: 0x7f4533,
-            sunlightColor: 0xffe3c8,
+            skyColor: 0x4dc8fc,
+            cloudColor: 0xff327a,
+            cloudShadowColor: 0x211850,
+            sunColor: 0xed17e0,
+            sunGlareColor: 0xe8c8ff,
+            sunlightColor: 0x0
         })
+    }
+
+    isIntro = () => {
+        return this.panelStack[0] == 'intro'
     }
 
     cleanBackgrounds = () => {
@@ -203,8 +213,14 @@ class PanelControl {
         this.audioCollection.do = d;
     }
 
+    resetInputs = () => {
+        this.setWhere("");
+        this.setLook("");
+        this.setDo("");
+    }
+
     formatRequestString = () => {
-        return `${this.audioCollection.look} ${this.audioCollection.where} ${this.audioCollection.do}`
+        return `${this.audioCollection.look} ${this.audioCollection.where} ${this.audioCollection.do} in happy mood , water colour painting`
     }
 
     getPetName = () => {
@@ -264,43 +280,13 @@ const getPreviousPanel = (currentPanel) => {
     return "intro";
 }
 
-document.addEventListener('keydown', async (event) => {
-
-    if (deactiveInput) {
-        return;
-    }
-
-    let nextPanel = "";
-    switch (event.key) {
-    case "ArrowLeft":
-        nextPanel = getPreviousPanel(panelsControl.topStack());
-        if (nextPanel != "") {
-            panelsControl.addStack(nextPanel)
-        }
-        break;
-    case "ArrowRight":
-        nextPanel = getNextPanel(panelsControl.topStack());
-        if (nextPanel != "") {
-            panelsControl.addStack(nextPanel)
-        }
-        break;
-    }
-})
 
 panelsControl.addStack('intro');
 
-$(".stop-button").hide();
-
-
-$(".stop-button").on('click', () => {
-    if (!panelsControl.getIsRecording()) {
-        panelsControl.startRecording();
-    } else {
-        panelsControl.stopRecording();
-    }
-});
-
 $(".backward-button-rectangle").on('click', () => {
+    if (deactiveInput) {
+        return;
+    }
     nextPanel = getPreviousPanel(panelsControl.topStack());
     if (nextPanel != "") {
         panelsControl.addStack(nextPanel)
@@ -308,6 +294,9 @@ $(".backward-button-rectangle").on('click', () => {
 });
 
 $(".backward-button-icon").on('click', () => {
+    if (deactiveInput) {
+        return;
+    }
     nextPanel = getPreviousPanel(panelsControl.topStack());
     if (nextPanel != "") {
         panelsControl.addStack(nextPanel)
@@ -315,6 +304,9 @@ $(".backward-button-icon").on('click', () => {
 });
 
 $(".forward-button-rectangle").on('click', () => {
+    if (deactiveInput) {
+        return;
+    }
     nextPanel = getNextPanel(panelsControl.topStack());
     
     if (nextPanel != "") {
@@ -323,6 +315,9 @@ $(".forward-button-rectangle").on('click', () => {
 });
 
 $(".forward-button-icon").on('click', () => {
+    if (deactiveInput) {
+        return;
+    }
     nextPanel = getNextPanel(panelsControl.topStack());
     
     if (nextPanel != "") {
@@ -332,6 +327,9 @@ $(".forward-button-icon").on('click', () => {
 
 // :)
 $(".back-button").on('click', () => {
+    if (deactiveInput) {
+        return;
+    }
     nextPanel = getPreviousPanel(panelsControl.topStack());
     if (nextPanel != "") {
         panelsControl.addStack(nextPanel)
@@ -355,6 +353,9 @@ $("#where").on('input', () => {
 });
 
 $(".right-square").on('click', () => {
+    if (deactiveInput) {
+        return;
+    }
     console.log(panelsControl.formatRequestString());
 
     $(".pet-name-text").html(panelsControl.getPetName());
@@ -370,12 +371,25 @@ $(".right-square").on('click', () => {
 
 
 $(".back-icon").on('click', () => {
+    if (deactiveInput) {
+        return;
+    }
     panelsControl.resetStack();
     panelsControl.addStack('intro');
+
+    panelsControl.resetInputs();
+
+    $("#where").val("");
+    $("#do").val("");
+    $("#look").val("");
+    $("#nme").val("");
 });
 
 
 $(".right-icon-f").on('click', () => {
+    if (deactiveInput) {
+        return;
+    }
     console.log(panelsControl.formatRequestString());
 
     $(".pet-name-text").html(panelsControl.getPetName());
@@ -390,6 +404,9 @@ $(".right-icon-f").on('click', () => {
 });
 
 $(".front-button").on('click', () => {
+    if (deactiveInput) {
+        return;
+    }
     nextPanel = getNextPanel(panelsControl.topStack());
 
     if (nextPanel != "") {
@@ -398,7 +415,6 @@ $(".front-button").on('click', () => {
 });
 
 const setImageOfPolaroidFrame = (urlString) => {
-    console.log(urlString);
 
     nextPanel = getNextPanel(panelsControl.topStack());
     
@@ -418,12 +434,35 @@ $(document).keypress(
     }
 );
 
+
 $(".left-square").on('click', () => {
-    panelsControl.resetStack();
-    panelsControl.addStack('intro');
+    if (deactiveInput) {
+        return;
+    }
+    nextPanel = getPreviousPanel(panelsControl.topStack());
+    if (nextPanel != "") {
+        panelsControl.addStack(nextPanel)
+    }
 });
 
 $(".left-icon-f").on('click', () => {
-    panelsControl.resetStack();
-    panelsControl.addStack('intro');
+    if (deactiveInput) {
+        return;
+    }
+    nextPanel = getPreviousPanel(panelsControl.topStack());
+    if (nextPanel != "") {
+        panelsControl.addStack(nextPanel)
+    }
+});
+
+
+$('#intro').on('click', () => {
+    if (deactiveInput) {
+        return;
+    }
+    nextPanel = getNextPanel(panelsControl.topStack());
+    
+    if (nextPanel != "") {
+        panelsControl.addStack(nextPanel)
+    }
 });

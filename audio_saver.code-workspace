@@ -1,0 +1,29 @@
+{
+	"folders": [
+		{
+			"path": "../audio_saver"
+		},
+		{
+			"path": "../soundwave"
+		},
+		{
+			"path": "../record_my_voice"
+		},
+		{
+			"path": "."
+		},
+		{
+			"path": "../rb_server"
+		},
+		{
+			"path": "../paperang"
+		},
+		{
+			"path": "../email_sender"
+		},
+		{
+			"path": "../2/rb"
+		}
+	],
+	"settings": {}
+}

@@ -76,7 +76,7 @@
     left: 632px;
     top: 272px;
 
-    font-family: myFirstFont;
+    font-family: normalText;
     font-style: normal;
     font-weight: 400;
     font-size: 75px;
@@ -298,15 +298,15 @@
 
 .main-text {
     position: absolute;
-    width: 602px;
-    height: 170px;
-    left: 665px;
-    top: 129px;
+    width: 563px;
+    height: 177px;
+    left: 679px;
+    top: 107px;
 
     font-family: normalText;
     font-style: normal;
     font-weight: 400;
-    font-size: 130px;
+    font-size: 110px;
     line-height: 90px;
     /* or 69% */
 
@@ -315,20 +315,22 @@
     color: #000000;
 }
 
+
+
 .fixer-3 {
     position: absolute;
-    width: 520px;
-    height: 78px;
-    left: 701px;
-    top: 176px;
+    width: 563px;
+    height: 94px;
+    left: 679px;
+    top: 149px;
 }
 
 .forward-button-rectangle {
     position: absolute;
     width: 99px;
     height: 99px;
-    left: 985px;
-    top: 662px;
+    left: 984px;
+    top: 637px;
 
     background: rgba(255, 255, 255, 0.7);
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -340,8 +342,8 @@
     position: absolute;
     width: 99px;
     height: 99px;
-    left: 838px;
-    top: 662px;
+    left: 837px;
+    top: 637px;
 
     background: rgba(255, 255, 255, 0.7);
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -360,8 +362,8 @@
     position: absolute;
     width: 52px;
     height: 60px;
-    left: 1009px;
-    top: 681px;
+    left: 1008px;
+    top: 656px;
 
     cursor: pointer;
 }
@@ -375,8 +377,8 @@
     position: absolute;
     width: 52px;
     height: 60px;
-    left: 862px;
-    top: 681px;
+    left: 861px;
+    top: 656px;
 
     
     cursor: pointer;
@@ -386,8 +388,8 @@
     position: absolute;
     width: 363px;
     height: 187px;
-    left: 779px;
-    top: 785px;
+    left: 778px;
+    top: 417px;
 
     background: rgba(255, 255, 255, 0.7);
     box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -396,10 +398,10 @@
 
 .example-text {
     position: absolute;
-    width: 313px;
-    height: 80px;
-    left: 808px;
-    top: 839px;
+    width: 295px;
+    height: 120px;
+    left: 812px;
+    top: 451px;
 
     font-family: normalText;
     font-style: normal;
@@ -411,12 +413,21 @@
     color: #000000;
 }
 
+.fixer-5 {
+    position: absolute;
+    width: 295px;
+    height: 126px;
+    left: 813px;
+    top: 448px;
+}
+
+
 .input-rectangle {
     position: absolute;
     width: 572px;
     height: 221px;
     left: 675px;
-    top: 417px;
+    top: 769px;
 
     background: rgba(255, 255, 255, 0.7);
     box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -444,15 +455,17 @@
 }
 
 .i-text-fixer-1 {
-    left: 660px;
+    left: 590px;
 }
 
+/*first prompt*/
+
 .i-text-fixer-2 {
-    left: 690px;
+    left: 590px;
 }
 
 .i-text-fixer-3 {
-    left: 600px;
+    left: 591px;
 }
 
 .center-rectangle {
@@ -513,7 +526,7 @@
 }
 
 .left-icon-f {
-    background: url("./assets/icons/biggerreset.png");
+    background: url("./assets/icons/back.png");
 
     background-size: contain;
     background-repeat: no-repeat;
@@ -539,6 +552,14 @@
     border-radius: 26px;
 
     cursor: pointer;
+}
+
+#fixer-pet-name {
+    position: absolute;
+    width: 519px;
+    height: 65px;
+    left: 701px;
+    top: 499px;
 }
 
 .right-icon-f {
@@ -686,7 +707,7 @@
     width: 763px;
     height: 211px;
     left: 579px;
-    top: 108px;
+    top: 90px;
 
     background: rgba(255, 255, 255, 0.7);
     box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -733,7 +754,7 @@
     left: 602px;
     top: 192px;
 
-    font-family: myFirstFont;
+    font-family: normalText;
     font-style: normal;
     font-weight: 400;
     font-size: 170px;
@@ -816,7 +837,7 @@
 }
 
 .button-2-name-icon {
-    background: url('./assets/icons/save.png');
+    background: url('./assets/icons/cloudfinal.png');
 
 
     background-size: contain;
@@ -985,7 +1006,7 @@
     left: 727px;
     top: 273px;
 
-    font-family: myFirstFont;
+    font-family: normalText;
     font-style: normal;
     font-weight: 400;
     font-size: 170px;
@@ -1012,13 +1033,14 @@
     left: 622px;
     top: 430px;
 
+
 }
 
 input,
 span,
 label,
 textarea {
-  font-family: myFirstFont;
+  font-family: normalText;
   display: block;
   margin: 10px;
   padding: 5px;
@@ -1099,17 +1121,17 @@ textarea.question:invalid {
 form {
     position: absolute;
     width: 519px;
-    height: 30px;
-    left: 701px;
-    top: 487px;
+    height: 65px;
+    left: 702px;
+    top: 847px;
 
 }
 
 input.question + label > span {
   font-weight: 300;
-  margin: 0px 0px 0px 120px;
+  margin: 25px 0px 0px 160px;
   position: absolute;
-  color: #8F8F8F;
+  color: #666666;
   font-size: 48px;
   top: -66px;
   left: 0px;
@@ -1117,6 +1139,8 @@ input.question + label > span {
   -webkit-transition: top 0.2s ease, font-size 0.2s ease, color 0.2s ease;
   transition: top 0.2s ease, font-size 0.2s ease, color 0.2s ease;
 }
+
+
 
 input[type="submit"] {
   -webkit-transition: opacity 0.2s ease, background 0.2s ease;

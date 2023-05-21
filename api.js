@@ -1,4 +1,4 @@
-const apiKey = "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"
+const apiKey = "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"
 
 const requestImage = (prompt) => {
     console.log(prompt);
