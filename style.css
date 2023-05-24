@@ -315,14 +315,20 @@
     color: #000000;
 }
 
-
+.fixer-6 {
+    position: absolute;
+    width: 552px;
+    height: 177px;
+    left: 684px;
+    top: 107px;
+}
 
 .fixer-3 {
     position: absolute;
-    width: 563px;
+    width: 596px;
     height: 94px;
-    left: 679px;
-    top: 149px;
+    left: 663px;
+    top: 148px;
 }
 
 .forward-button-rectangle {
@@ -384,6 +390,15 @@
     cursor: pointer;
 }
 
+.e-fixer-1{
+    position: absolute;
+
+    width: 295px !important;
+    height: 120px !important;
+    left: 812px !important;
+    top: 450px !important;
+}
+
 .example-rectangle {
     position: absolute;
     width: 363px;
@@ -398,10 +413,10 @@
 
 .example-text {
     position: absolute;
-    width: 295px;
-    height: 120px;
-    left: 812px;
-    top: 451px;
+    width: 312px;
+    height: 76px;
+    left: 805px;
+    top: 472px;
 
     font-family: normalText;
     font-style: normal;
@@ -436,9 +451,9 @@
 
 .instruction-text {
     position: absolute;
-    width: 740px;
+    width: 748px;
     height: 50px;
-    top: 343px;
+    top: 334px;
 
     font-family: normalText;
     font-style: normal;
@@ -455,7 +470,7 @@
 }
 
 .i-text-fixer-1 {
-    left: 590px;
+    left: 600px !important;
 }
 
 /*first prompt*/
@@ -465,7 +480,7 @@
 }
 
 .i-text-fixer-3 {
-    left: 591px;
+    left: 619px !important;
 }
 
 .center-rectangle {
