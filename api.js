@@ -1,4 +1,4 @@
-const apiKey = "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"
+
 
 const requestImage = (prompt) => {
     console.log(prompt);
@@ -11,6 +11,26 @@ const requestImage = (prompt) => {
         },
         success: function(data) {
             setImageOfPolaroidFrame(data.data[0].url);
+        },
+        dataType: 'json',
+        type: 'post'
+    });
+}
+
+const sendEmail = (c) => {
+    console.log(c);
+    $.ajax({
+        url: "http://localhost:8081/send",
+        data: JSON.stringify({
+            "name": c.name,
+            "email": c.email,
+            "image": c.image
+        }),
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        success: function(data) {
+            console.log("yay");
         },
         dataType: 'json',
         type: 'post'

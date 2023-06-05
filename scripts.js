@@ -5,6 +5,10 @@
 
 let deactiveInput = false;
 
+let imageUrl = '';
+let userEmail = '';
+let petName = '';
+
 fadeInCard = (id) => {
     anime({
         targets: `#${id}`,
@@ -338,6 +342,8 @@ $(".back-button").on('click', () => {
 
 $("#nme").on('input', () => {
     panelsControl.setName($("#nme").val());
+
+    petName = $("#nme").val();
 });
 
 $("#look").on('input', () => {
@@ -367,6 +373,15 @@ $(".right-square").on('click', () => {
     if (nextPanel != "") {
         panelsControl.addStack(nextPanel);
     }
+});
+
+$(".send-to-email-icon").on('click', () => {
+
+    sendEmail({
+        name: petName,
+        email: userEmail,
+        image: imageUrl
+    })
 });
 
 
@@ -414,6 +429,7 @@ $(".front-button").on('click', () => {
     }
 });
 
+
 const setImageOfPolaroidFrame = (urlString) => {
 
     nextPanel = getNextPanel(panelsControl.topStack());
@@ -424,7 +440,15 @@ const setImageOfPolaroidFrame = (urlString) => {
 
     $('.image-placement').css('background-size', 'contain');
     $('.image-placement').css('background-image', `url(${urlString})`);
+
+    imageUrl = urlString;
 }
+
+const getEmail = () => {
+    userEmail = prompt("Enter your email address.");
+}
+
+
 
 $(document).keypress(
     function(event){

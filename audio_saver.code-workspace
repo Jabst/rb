@@ -23,6 +23,9 @@
 		},
 		{
 			"path": "../2/rb"
+		},
+		{
+			"path": "../sendmail"
 		}
 	],
 	"settings": {}
