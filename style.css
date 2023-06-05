@@ -1206,3 +1206,11 @@ input.question:invalid ~ input[type="submit"], textarea.question:invalid ~ input
 
     background: url("./assets/icons/logo.png");
 }
+
+.modal-input {
+    font-size: 37px;
+    top: -29px;
+    left: 2px;
+    position: absolute;
+    padding: 0;
+}

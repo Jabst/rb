@@ -1,5 +1,3 @@
-
-
 const requestImage = (prompt) => {
     console.log(prompt);
     $.ajax({

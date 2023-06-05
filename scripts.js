@@ -375,13 +375,34 @@ $(".right-square").on('click', () => {
     }
 });
 
+
+
 $(".send-to-email-icon").on('click', () => {
 
-    sendEmail({
-        name: petName,
-        email: userEmail,
-        image: imageUrl
-    })
+    $.dialog({
+        "body": "Write down your email address" ,
+        "title": "Beyond Rainbow Bridge",
+        "show": true,
+        "footer": "<input class=\"modal-input\" id=\"userEmail\" type=\"text\" placeholder=\"Your email here\" /> <button id=\"send\" class=\"dialog-button\" data-dialog-action=\"hide\">Send</button>",
+        height: 150,
+    });
+
+    $("#userEmail").on('input', () => {
+        userEmail = $("#userEmail").val();
+    });
+
+    $("#send").on('click', () => {
+
+        console.log(userEmail);
+        console.log(imageUrl);
+        console.log(petName);
+
+        sendEmail({
+            name: petName,
+            email: userEmail,
+            image: imageUrl
+        })
+    });
 });
 
 
